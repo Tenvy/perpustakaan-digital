@@ -1,15 +1,16 @@
 'use client';
 import React, { useState } from 'react';
 import { useSession, signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const Form = () => {
-    const { data: session, status } = useSession()
-    const router = useRouter()
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
-    if(session) {
-        router.push('/')
-    }
+  if (session) {
+    router.push('/');
+  }
 
   const [formData, setFormData] = useState({
     Username: '',
@@ -32,17 +33,24 @@ const Form = () => {
 
   return (
     <div className="h-screen w-screen flex flex-nowrap justify-center items-center px-3">
-      <div className="min-w-fit px-5 min-h-fit w-[40%] py-5 rounded-xl flex flex-col gap-10 border-white">
-        <div>
-          <h2 className="text-xl font-bold p-3">Email</h2>
-          <input onChange={onChangeInput} type="Username" placeholder="Username" name="Username" className="w-full rounded-full p-3 text-black" />
+      <div className="min-w-fit px-6 min-h-fit w-[40vh] py-5 rounded-xl flex flex-col gap-4 bg-white text-primary-color">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold">Sign In</h1>
         </div>
         <div>
-          <h2 className="text-xl font-bold p-3">Password</h2>
-          <input onChange={onChangeInput} type="Password" name="Password" placeholder="Password" className="w-full rounded-full p-3 text-black" />
+          <h2 className="text-md font-semibold p-2">Username</h2>
+          <input onChange={onChangeInput} type="text" placeholder="Username" name="Username" className="w-full rounded-full py-2 px-4 text-black border" required />
         </div>
-        <button onClick={signin} className="bg-hover text-hover p-3 rounded-full">
-          Login
+        <div>
+          <h2 className="text-md font-semibold p-2">Password</h2>
+          <input onChange={onChangeInput} type="password" name="Password" placeholder="Secret" className="w-full rounded-full py-2 px-4 text-black border" required />
+        </div>
+        <div className='flex gap-1 text-sm p-2'>
+          <h2>Dont have account?</h2>
+          <Link href="/register" className='font-bold'>Register here</Link>
+        </div>
+        <button onClick={signin} className="bg-primary-color text-secondary-color p-3 rounded-full">
+          Sign In
         </button>
       </div>
     </div>

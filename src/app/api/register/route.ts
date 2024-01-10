@@ -1,6 +1,7 @@
 import prisma from "@/utils/db"
 import { NextResponse } from "next/server"
 import bcrypt from "bcrypt"
+import { signIn } from "next-auth/react"
 
 export async function GET() {
     try {
@@ -32,7 +33,6 @@ export async function POST(request: Request) {
                 Alamat: alamat
             }
         })
-
         return NextResponse.json(response)
     } catch (error) {
         return NextResponse.json({msg: "Something went wrong.", error})
