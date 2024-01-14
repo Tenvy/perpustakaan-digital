@@ -1,16 +1,6 @@
 import prisma from "@/utils/db"
 import { NextResponse } from "next/server"
 import bcrypt from "bcrypt"
-import { signIn } from "next-auth/react"
-
-export async function GET() {
-    try {
-        const response = await prisma.user.findMany()
-        return NextResponse.json(response) 
-    } catch (error) {
-        
-    }
-}
 
 export async function POST(request: Request) {
     const { username, password, email, namaLengkap, alamat } = await request.json()
