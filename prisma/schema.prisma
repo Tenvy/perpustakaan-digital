@@ -9,7 +9,7 @@ datasource db {
 
 model buku {
   BukuID              Int                   @id @default(autoincrement())
-  Judul               String                @db.VarChar(225)
+  Judul               String                @db.VarChar(225) @unique
   Penulis             String                @db.VarChar(225)
   Penerbit            String                @db.VarChar(225)
   TahunTerbit         Int
@@ -83,6 +83,7 @@ model user {
   Password       String           @db.VarChar(255)
   Email          String           @db.VarChar(255)
   Nama_lengkap   String           @db.VarChar(255)
+  Role           String           @db.VarChar(255)
   Alamat         String           @db.Text
   koleksipribadi koleksipribadi[]
   peminjaman     peminjaman[]
