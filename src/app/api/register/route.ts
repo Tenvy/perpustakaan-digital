@@ -20,6 +20,7 @@ export async function POST(request: Request) {
                 Password: encryptedPass,
                 Email: email,
                 Nama_lengkap: namaLengkap,
+                Role: 'peminjam',
                 Alamat: alamat
             }
         })
