@@ -12,7 +12,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request){
-    const { Judul, Penulis, Penerbit, TahunTerbit }:bukuType = await request.json()
+    const { Judul, Penulis, Penerbit, TahunTerbit, Deskripsi, Gambar }:bukuType = await request.json()
     try {
         const check = await prisma.buku.findUnique({
             where: {
@@ -25,7 +25,9 @@ export async function POST(request: Request){
                 Judul,
                 Penulis,
                 Penerbit,
-                TahunTerbit
+                TahunTerbit,
+                Deskripsi,
+                Gambar,
             }
         })
         return NextResponse.json({msg: 'Buku Berhasil Dibuat!',response})
