@@ -1,4 +1,5 @@
 export type bukuType = {
+    BukuID: number;
     Judul: string;
     Penulis: string;
     Penerbit: string;
