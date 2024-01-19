@@ -3,4 +3,9 @@ const getBook = async () => {
     return response.json()
 }
 
-export { getBook }
+const getBookById = async (id: string) => {
+    const response = await fetch(process.env.NEXTAUTH_URL + `/api/buku/${id}`, {method: 'GET', cache: 'no-store'})
+    return response.json()
+}
+
+export { getBook, getBookById }
