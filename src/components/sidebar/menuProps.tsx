@@ -7,7 +7,7 @@ const iconSize:number = 20;
 export const MENU_ITEMS: MenuItemProps[] = [
   {
     title: 'Discover',
-    href: '/',
+    href: '/discover',
     icon: <BookIcon size={iconSize} />,
     isShow: true,
   },
