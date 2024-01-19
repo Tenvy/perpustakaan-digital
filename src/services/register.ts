@@ -15,7 +15,7 @@ const CreateUser = async (data: userType) => {
     Username: data.username,
     Password: data.password,
     redirect: true,
-    callbackUrl: '/',
+    callbackUrl: '/discover',
   });
   return response.json();
 };
