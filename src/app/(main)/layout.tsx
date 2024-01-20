@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '../globals.css';
-import Provider from '@/provider/AuthProvider';
+import Provider, { EdgeStoreProvider } from '@/provider/AuthProvider';
 import { getServerSession } from 'next-auth'
 import Sidebar from '@/components/sidebar/sidebar';
 import Container from '@/components/elements/container';
@@ -19,12 +19,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={inter.className}>
         <Provider session={session}>
-          <div className='flex'>
-            <Sidebar />
-            <Container>
-              {children}
-            </Container>
-          </div>
+          <EdgeStoreProvider>
+            <div className='flex'>
+              <Sidebar />
+              <Container>
+                {children}
+              </Container>
+            </div>
+          </EdgeStoreProvider>
         </Provider>
       </body>
     </html>
