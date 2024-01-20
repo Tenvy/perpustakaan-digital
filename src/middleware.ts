@@ -1,6 +1,4 @@
 import { withAuth } from "next-auth/middleware";
-import { redirect } from "next/dist/server/api-utils";
-import { NextResponse } from "next/server";
 
 export default withAuth(
     function middleware(req) {
