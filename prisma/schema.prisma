@@ -13,7 +13,7 @@ model buku {
   Penulis             String                @db.VarChar(225)
   Deskripsi           String                @db.VarChar(225)
   Penerbit            String                @db.VarChar(225)
-  Gambar              String                @db.VarChar(225)
+  Gambar              String?               @db.VarChar(225)
   TahunTerbit         Int
   kategoribuku_relasi kategoribuku_relasi[]
   koleksipribadi      koleksipribadi[]
