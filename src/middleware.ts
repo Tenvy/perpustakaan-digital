@@ -1,11 +1,16 @@
-import { withAuth } from "next-auth/middleware";
+import { withAuth, NextRequestWithAuth } from "next-auth/middleware";
+import { NextResponse } from "next/server";
 
 export default withAuth(
-    function middleware(req) {
-        // console.log("🚀 ~ file: middleware.ts:7 ~ middleware ~ req:", req);
-        // return Nextreponse
-        // console.log('middleware nextauth token', req.nextauth.token);
-        // return NextResponse.rewrite(new URL('/', req.url));
+
+    function middleware(request: NextRequestWithAuth) {
+
+        if (request.nextUrl.pathname.startsWith("/buku")
+            && request.nextauth.token?.Role !== "admin") {
+            return NextResponse.rewrite(
+                new URL("/denied", request.url)
+            )
+        }
     },
     {   
         pages: {
@@ -26,4 +31,4 @@ export default withAuth(
     }
 )
 
-export const config = { matcher: ["/((?!api|_next/static|_next/image|favicon.ico|register).*)"] };
+export const config = { matcher: ["/((?!api|_next/static|_next/image|favicon.ico|register).*)", "/buku"] };
