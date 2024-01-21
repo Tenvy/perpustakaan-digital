@@ -25,6 +25,10 @@ const postBook = async (data: bukuType) => {
     },
     body: JSON.stringify(data)
   });
+  if (!response.ok) {
+    const errorData = await response.json();
+    return errorData.msg
+  }
   return response.json();
 };
 
@@ -33,6 +37,10 @@ const deleteBook = async (id: string) => {
       method: "DELETE",
       cache: "no-store",
     });
+    if (!response.ok) {
+      const errorData = await response.json();
+      return errorData.msg
+    }
     return response.json();
   };
 
@@ -45,6 +53,10 @@ const deleteBook = async (id: string) => {
       },
       body: JSON.stringify(data)
     });
+    if (!response.ok) {
+      const errorData = await response.json();
+      return errorData.msg
+    }
     return response.json();
   };
 
