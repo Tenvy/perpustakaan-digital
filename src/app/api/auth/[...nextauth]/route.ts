@@ -59,6 +59,7 @@ export const authOptions: NextAuthOptions = {
             ...session.UserID,
             ...session.Username,
             ...session.Nama_Lengkap,
+            ...session.Role,
             ...session.Email,
             // };
           };
@@ -68,6 +69,7 @@ export const authOptions: NextAuthOptions = {
           UserID: user.UserID,
           Username: user.Username,
           Nama_Lengkap: user.Nama_Lengkap,
+          Role: user.Role,
           Email: user.Email,
         };
       }
@@ -81,6 +83,7 @@ export const authOptions: NextAuthOptions = {
           UserID: token.UserID,
           Username: token.Username,
           Nama_Lengkap: token.Nama_Lengkap,
+          Role: token.Role,
           Email: token.Email,
         },
       };
