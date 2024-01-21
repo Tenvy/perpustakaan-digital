@@ -25,7 +25,7 @@ model buku {
 
 model kategoribuku {
   KategoriID          Int                   @id @default(autoincrement())
-  NamaKategori        String                @db.VarChar(255)
+  NamaKategori        String                @db.VarChar(255) @unique
   kategoribuku_relasi kategoribuku_relasi[]
 }
 
