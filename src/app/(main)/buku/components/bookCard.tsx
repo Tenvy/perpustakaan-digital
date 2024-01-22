@@ -1,6 +1,10 @@
+'use client'
 import Card from "@/components/elements/card"
+import { deleteBook } from "@/services/book"
 import { bukuType } from "@/type/buku"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { useEdgeStore } from "@/provider/AuthProvider"
 
 const BookCard = ({
     BukuID,
@@ -11,6 +15,24 @@ const BookCard = ({
     TahunTerbit,
     Deskripsi
 }: bukuType) => {
+    const router = useRouter()
+    const { edgestore } = useEdgeStore()
+
+    const deleteData = async (id : number): Promise<void> => {
+        try {
+            if(!id) return;
+
+            await edgestore.publicImages.delete({
+                url: Gambar
+            });
+
+            await deleteBook(id)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            router.refresh();
+        }
+    }
 
     return (
         <>
@@ -40,7 +62,7 @@ const BookCard = ({
                             </div>
                         </div>
                         <div>
-                            <button className="bg-red-600 py-2 px-4 rounded-md">
+                            <button onClick={() => deleteData(BukuID)} className="bg-red-600 py-2 px-4 rounded-md">
                                 Delete
                             </button>
                         </div>
