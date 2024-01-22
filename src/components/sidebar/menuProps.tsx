@@ -17,4 +17,10 @@ export const MENU_ITEMS: MenuItemProps[] = [
     icon: <PencilIcon size={iconSize} />,
     isShow: true,
   },
+  {
+    title: 'Pendataan Kategori',
+    href: '/kategori',
+    icon: <PencilIcon size={iconSize} />,
+    isShow: true,
+  },
 ]; 
