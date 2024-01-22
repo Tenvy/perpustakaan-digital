@@ -17,9 +17,8 @@ const getBookById = async (id: string) => {
 };
 
 const postBook = async (data: bukuType) => {
-  const response = await fetch(process.env.NEXTAUTH_URL + `/api/buku`, {
+  const response = await fetch(`/api/buku`, {
     method: "POST",
-    cache: "no-store",
     headers: {
         "Content-Type": "application/json",
     },
@@ -32,8 +31,8 @@ const postBook = async (data: bukuType) => {
   return response.json();
 };
 
-const deleteBook = async (id: string) => {
-    const response = await fetch(process.env.NEXTAUTH_URL + `/api/buku/${id}`, {
+const deleteBook = async (id: number) => {
+    const response = await fetch(`/api/buku/${id}`, {
       method: "DELETE",
       cache: "no-store",
     });
