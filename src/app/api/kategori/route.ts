@@ -14,22 +14,6 @@ export async function GET() {
 export async function POST(request: Request){
     const data = await request.json()
     try {
-
-        const check = await data.map(async (kategori: kategoriType) => {
-            const check = await prisma.kategoribuku.findUnique({
-                where: {
-                    NamaKategori: kategori.NamaKategori
-                }
-            })
-            return check?.NamaKategori
-        })
-        return NextResponse.json(check)
-        // const check = await prisma.kategoribuku.findUnique({
-        //     where: {
-        //         NamaKategori
-        //     }
-        // })
-        if (check) return NextResponse.json('Kategori sudah ada!')
         const response = await prisma.kategoribuku.createMany({data})
         return NextResponse.json({msg: 'Kategori Berhasil Dibuat!',response})
     } catch (error) {
