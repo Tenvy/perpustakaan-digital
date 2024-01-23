@@ -22,7 +22,8 @@ const CreateSection = () => {
         Deskripsi: '',
         Gambar: 'https://edit.org/images/cat/book-covers-big-2019101610.jpg',
         TahunTerbit: 1999,
-        Kategori: [],
+        kategoribuku_relasi: [],
+        peminjaman: []
     });
     const [Loading, setLoading] = useState(false)
     const [modalCreate, setModalCreate] = useState(false)
@@ -63,7 +64,7 @@ const CreateSection = () => {
                 const response = await postBook({
                     ...values,
                     Gambar: res.url,
-                    Kategori: dataList2
+                    kategoribuku_relasi: dataList2
                 })
                 return response
             }
@@ -80,7 +81,8 @@ const CreateSection = () => {
                 Deskripsi: '',
                 Gambar: 'https://edit.org/images/cat/book-covers-big-2019101610.jpg',
                 TahunTerbit: 0,
-                Kategori: [],
+                kategoribuku_relasi: [],
+                peminjaman: []
             })
             setLoading(false)
             router.refresh();
