@@ -12,8 +12,8 @@ const CardSection = async () => {
             {data?.map((res: bukuType, key: number) => {
                 return (
                     <Link href={`/discover/${res.BukuID}`} key={key}>
-                        <Card className="flex">
-                            <div className=" mx-auto p-2 flex flex-col gap-2">
+                        <Card className="flex h-full">
+                            <div className="mx-auto p-2 flex flex-col gap-2">
                                 <Image src={res.Gambar} alt="Gambar-Buku" width={200} height={300} className="border" />
                                 <div className="text-primary-color">
                                     <div className="text-lg font-bold">
