@@ -14,6 +14,9 @@ export async function GET(request: Request, context: { params: { id: string } } 
         const response = await prisma.buku.findFirst({
             where: {
                 BukuID: parsedId
+            },
+            include: {
+                kategoribuku_relasi: true
             }
         })
         if (!response) return NextResponse.json({msg: 'Buku Tidak Ada!'})
