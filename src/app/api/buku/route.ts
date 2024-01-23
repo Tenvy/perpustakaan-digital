@@ -13,7 +13,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request){
-    const { Judul, Penulis, Penerbit, TahunTerbit, Deskripsi, Gambar, Kategori }:bukuType = await request.json()
+    const { Judul, Penulis, Penerbit, TahunTerbit, Deskripsi, Gambar, kategoribuku_relasi }:bukuType = await request.json()
     try {
         const check = await prisma.buku.findUnique({
             where: {
@@ -22,8 +22,8 @@ export async function POST(request: Request){
         })
         if (check) return NextResponse.json('Buku sudah ada!')
 
-        const categorySet = new Set(Kategori?.map((Kategori) => Kategori.KategoriID));
-        if (Kategori && Kategori.length !== categorySet.size) {
+        const categorySet = new Set(kategoribuku_relasi?.map((Kategori) => Kategori.KategoriID));
+        if (kategoribuku_relasi && kategoribuku_relasi.length !== categorySet.size) {
             return NextResponse.json({ msg: "Duplicate values in Category" });
         }
 
@@ -36,7 +36,7 @@ export async function POST(request: Request){
                 Deskripsi,
                 Gambar,
                 kategoribuku_relasi: {
-                    create: Kategori?.map(kategori => ({
+                    create: kategoribuku_relasi?.map(kategori => ({
                         kategoribuku: {
                             connect: {
                                 KategoriID: kategori.KategoriID
