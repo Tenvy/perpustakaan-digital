@@ -5,6 +5,7 @@ export type MenuItemProps = {
   href: string;
   icon: JSX.Element;
   isShow?: boolean;
+  user?: string[];
   className?: string;
   children?: ReactNode;
   hideIcon?: boolean;
