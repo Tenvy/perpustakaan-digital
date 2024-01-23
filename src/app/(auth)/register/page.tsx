@@ -10,6 +10,7 @@ const Form = () => {
     email: '',
     namaLengkap: '',
     alamat: '',
+    peminjaman: []
   });
   const [confirm, setConfirm] = useState<Boolean>()
 
