@@ -1,4 +1,4 @@
-import { kategoribuku } from "@prisma/client";
+import { kategoribuku, peminjaman } from "@prisma/client";
 
 export type bukuType = {
     BukuID: number;
@@ -8,5 +8,6 @@ export type bukuType = {
     Deskripsi: string;
     Gambar: string;
     TahunTerbit: number;
-    Kategori?: kategoribuku[]
+    kategoribuku_relasi?: kategoribuku[]
+    peminjaman: peminjaman[];
 }
