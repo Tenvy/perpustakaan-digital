@@ -20,7 +20,7 @@ const CreateSection = () => {
         Penulis: '',
         Penerbit: '',
         Deskripsi: '',
-        Gambar: 'https://edit.org/images/cat/book-covers-big-2019101610.jpg',
+        Gambar: '',
         TahunTerbit: 1999,
         kategoribuku_relasi: [],
         peminjaman: []
@@ -79,7 +79,7 @@ const CreateSection = () => {
                 Penulis: '',
                 Penerbit: '',
                 Deskripsi: '',
-                Gambar: 'https://edit.org/images/cat/book-covers-big-2019101610.jpg',
+                Gambar: '',
                 TahunTerbit: 0,
                 kategoribuku_relasi: [],
                 peminjaman: []
