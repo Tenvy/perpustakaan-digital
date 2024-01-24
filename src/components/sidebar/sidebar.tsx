@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 import { MENU_ITEMS } from './menuProps'
+import LogOut from "./signout";
 
 const Sidebar = async () => {
     const session:any = await getServerSession(authOptions)
@@ -19,6 +20,7 @@ const Sidebar = async () => {
                     <Breakline/>
                     <Menu list={filteredMenu}/>
                     <Breakline/>
+                    <LogOut/>
                 </div>
         </header>
     )
