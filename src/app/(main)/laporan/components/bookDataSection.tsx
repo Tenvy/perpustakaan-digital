@@ -7,7 +7,6 @@ import { peminjamanType } from "@/type/peminjaman"
 const BookDataSection = async () => {
     const data: bukuType[] = await getBook()
     const getDataPinjam: peminjamanType[] = await getPeminjaman()
-    console.log(getDataPinjam)
     return (
         <div className="flex flex-col gap-2">
             <div className="text-xl font-bold">
