@@ -3,6 +3,7 @@ import { getCategoryServer } from "@/services/kategori"
 import { bukuType } from "@/type/buku"
 import { kategoriType } from "@/type/kategori"
 import Image from "next/image"
+import cover from "@/../public/coverDefault.png"
 
 const DetailSection = async ({
     BukuID,
@@ -20,7 +21,11 @@ const DetailSection = async ({
         <div className="p-4">
             <div className="flex text-primary-color">
                 <div>
-                    <Image src={Gambar} alt="Book-Image" width={200} height={300} />
+                {Gambar ? (
+                                    <Image src={Gambar} alt={Judul} width={200} height={300} className="border" />
+                                ):(
+                                    <Image src={cover} alt={Judul} width={200} height={300} className="border"/>
+                                )}
                 </div>
                 <div className="w-full">
                     <div className="px-4">
