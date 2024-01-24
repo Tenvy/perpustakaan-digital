@@ -11,7 +11,7 @@ model buku {
   BukuID              Int                   @id @default(autoincrement())
   Judul               String                @db.VarChar(225) @unique
   Penulis             String                @db.VarChar(225)
-  Deskripsi           String                @db.VarChar(225)
+  Deskripsi           String                @db.Text
   Penerbit            String                @db.VarChar(225)
   Gambar              String?               @db.VarChar(225)
   TahunTerbit         Int
