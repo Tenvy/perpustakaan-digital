@@ -3,6 +3,7 @@ import Card from "@/components/elements/card"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { kembalikanBuku } from "@/services/peminjaman"
+import cover from "@/../public/coverDefault.png"
 
 const BookCard = ({
     BukuID,
@@ -35,7 +36,11 @@ const BookCard = ({
             <Card className="!bg-primary-color px-4 py-2 !text-secondary-color">
                 <div className="flex gap-4">
                     <div className="min-w-[140px]">
-                        <Image src={Gambar} alt="Book Image" width={140} height={240} className="border" />
+                    {Gambar ? (
+                        <Image src={Gambar} alt={Judul} width={140} height={240} className="border" />
+                        ):(
+                        <Image src={cover} alt={Judul} width={140} height={240} className="border"/>
+                    )}
                     </div>
                     <div className="flex flex-col justify-between">
                         <div>
@@ -57,7 +62,7 @@ const BookCard = ({
                                 {Deskripsi}
                             </div>
                         </div>
-                        <div>
+                        <div className="py-2">
                             <button onClick={() => deleteData(PeminjamanID)} className="bg-green-600 py-2 px-4 rounded-md">
                                 Kembalikan
                             </button>
