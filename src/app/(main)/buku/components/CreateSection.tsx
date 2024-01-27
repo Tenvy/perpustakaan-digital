@@ -116,8 +116,6 @@ const CreateSection = () => {
         setCategoryData(updatedList1);
     };
 
-    console.log(dataList2)
-
     return (
         <div className="pb-2">
             <button onClick={() => setModalCreate(true)} className="bg-green-600 text-secondary-color py-2 px-4 rounded-md flex gap-2 items-center">
