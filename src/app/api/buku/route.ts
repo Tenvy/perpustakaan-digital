@@ -4,7 +4,15 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
     try {
-        const response = await prisma.buku.findMany()
+        const response = await prisma.buku.findMany({
+            include: {
+                kategoribuku_relasi: {
+                    include: {
+                        kategoribuku: true
+                    }
+                }
+            }
+        })
         return NextResponse.json(response)
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -13,7 +21,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request){
-    const { Judul, Penulis, Penerbit, TahunTerbit, Deskripsi, Gambar, kategoribuku_relasi }:bukuType = await request.json()
+    const { Judul, Penulis, Penerbit, TahunTerbit, Deskripsi, Gambar, kategoribuku }:bukuType = await request.json()
     try {
         const check = await prisma.buku.findUnique({
             where: {
@@ -22,8 +30,8 @@ export async function POST(request: Request){
         })
         if (check) return NextResponse.json('Buku sudah ada!')
 
-        const categorySet = new Set(kategoribuku_relasi?.map((Kategori) => Kategori.KategoriID));
-        if (kategoribuku_relasi && kategoribuku_relasi.length !== categorySet.size) {
+        const categorySet = new Set(kategoribuku?.map((Kategori) => Kategori.KategoriID));
+        if (kategoribuku && kategoribuku.length !== categorySet.size) {
             return NextResponse.json({ msg: "Duplicate values in Category" });
         }
 
@@ -36,7 +44,7 @@ export async function POST(request: Request){
                 Deskripsi,
                 Gambar,
                 kategoribuku_relasi: {
-                    create: kategoribuku_relasi?.map(kategori => ({
+                    create: kategoribuku?.map(kategori => ({
                         kategoribuku: {
                             connect: {
                                 KategoriID: kategori.KategoriID
@@ -46,6 +54,16 @@ export async function POST(request: Request){
                 }
             }
         })
+
+        // if(kategoribuku) {
+        //     await prisma.kategoribuku_relasi.createMany({
+        //             data: kategoribuku.map((res) => ({
+        //                 BukuID: response.BukuID,
+        //                 KategoriID: res.KategoriID
+        //             }))
+        //     })
+        // }
+
         return NextResponse.json({msg: 'Buku Berhasil Dibuat!',response})
     } catch (error) {
         console.error('Error fetching data:', error);
