@@ -23,14 +23,20 @@ const BookCard = ({
 }: any) => {
   const router = useRouter();
 
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [user, setUser] = useState("");
 
-  const deleteData = async (id: string): Promise<void> => {
-    try {
-      if (!id) return;
+  const handlePrint = () => {
+    setShow(true);
+    setTimeout(() => {
+      window.print();
+      setShow(false);
+    }, 5);
+  };
 
-      await kembalikanBuku(id);
+  const printData = async (id: string): Promise<void> => {
+    try {
+      handlePrint()
     } catch (error) {
       console.log(error);
     } finally {
@@ -117,7 +123,7 @@ const BookCard = ({
             </div>
             <div className="flex items-center gap-2 py-2">
               <button
-                onClick={() => deleteData(PeminjamanID)}
+                onClick={() => printData(PeminjamanID)}
                 className="bg-green-600 py-2 px-4 rounded-md"
               >
                 Print Laporan
