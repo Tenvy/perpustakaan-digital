@@ -22,7 +22,7 @@ const CreateSection = () => {
         Deskripsi: '',
         Gambar: '',
         TahunTerbit: 1999,
-        kategoribuku_relasi: [],
+        kategoribuku: [],
         peminjaman: []
     });
     const [Loading, setLoading] = useState(false)
@@ -64,11 +64,11 @@ const CreateSection = () => {
                 const response = await postBook({
                     ...values,
                     Gambar: res.url,
-                    kategoribuku_relasi: dataList2
+                    kategoribuku: dataList2
                 })
                 return response
             }
-            const response = await postBook(values)
+            const response = await postBook({...values, kategoribuku: dataList2})
             return response
         } catch (error) {
             console.log(error)
@@ -81,7 +81,7 @@ const CreateSection = () => {
                 Deskripsi: '',
                 Gambar: '',
                 TahunTerbit: 0,
-                kategoribuku_relasi: [],
+                kategoribuku: [],
                 peminjaman: []
             })
             setLoading(false)
