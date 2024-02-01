@@ -16,7 +16,7 @@ const DetailSection = async ({
     kategoribuku_relasi
 }: bukuType) => {
     const category: kategoriType[] = await getCategoryServer()
-
+    console.log(kategoribuku_relasi)
     return (
         <div className="p-4">
             <div className="flex text-primary-color">
@@ -65,13 +65,13 @@ const DetailSection = async ({
                             Kategori
                         </div>
                         <li className="flex gap-4 flex-wrap">
-                            {kategoribuku_relasi?.length !== 0 ? category
-                                .filter(item1 => kategoribuku_relasi?.some(item2 => item2.KategoriID === item1.KategoriID))
-                                .map(item => (
-                                    <div key={item.KategoriID} className="bg-green-500 py-2 px-4 text-secondary-color rounded-md cursor-default">
-                                        {item.NamaKategori}
+                            {kategoribuku_relasi?.map(res => {
+                                return (
+                                    <div key={res.kategoribuku_relasi?.KategoriID} className="bg-green-500 py-2 px-4 text-secondary-color rounded-md cursor-default">
+                                        {res.kategoribuku.NamaKategori}
                                     </div>
-                                )) : 'Tidak ada kategori'}
+                                )
+                            })}
                         </li>
                     </div>
                 </div>
