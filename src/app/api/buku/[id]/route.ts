@@ -16,7 +16,11 @@ export async function GET(request: Request, context: { params: { id: string } } 
                 BukuID: parsedId
             },
             include: {
-                kategoribuku_relasi: true
+                kategoribuku_relasi: {
+                    include: {
+                        kategoribuku: true
+                    }
+                }
             }
         })
         if (!response) return NextResponse.json({msg: 'Buku Tidak Ada!'})
@@ -43,6 +47,13 @@ export async function DELETE(request: Request, context: { params: { id: string }
         })
 
         if (!check) return NextResponse.json({msg: 'Buku Tidak Ada!'})
+        
+        await prisma.kategoribuku_relasi.deleteMany({
+            where: {
+                BukuID: parsedId
+            }
+        })
+
         const response = await prisma.buku.delete({
             where: {
                 BukuID: parsedId
@@ -56,7 +67,7 @@ export async function DELETE(request: Request, context: { params: { id: string }
 }
 
 export async function PATCH(request: Request, context: { params: { id: string } } ){
-    const { Judul, Penulis, Penerbit, TahunTerbit, Deskripsi, Gambar }:bukuType = await request.json()
+    const { Judul, Penulis, Penerbit, TahunTerbit, Deskripsi, Gambar, kategoribuku }:bukuType = await request.json()
     const id = context.params.id
     
     try {
@@ -86,6 +97,21 @@ export async function PATCH(request: Request, context: { params: { id: string } 
                 Gambar,
             }
         })
+
+        if(kategoribuku) {
+            await prisma.kategoribuku_relasi.deleteMany({
+                    where: {
+                        BukuID: response.BukuID
+                    }
+            })
+            
+            await prisma.kategoribuku_relasi.createMany({
+                    data: kategoribuku.map((res) => ({
+                        BukuID: response.BukuID,
+                        KategoriID: res.KategoriID
+                    }))
+            })
+        }
         return NextResponse.json({msg: 'Buku Berhasil Diperbarui!', response})
     } catch (error) {
         return NextResponse.json({msg: 'Something went wrong.', error})
